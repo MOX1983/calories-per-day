@@ -33,6 +33,16 @@ public class HelloController {
 
     @FXML
     void initialize() {
+        Login.setOnAction(event -> {
+            String log = TextLogin.getText().trim();
+            String pass = TextRegister.getText().trim();
+
+            if(!log.equals("") && !pass.equals("")){
+                loginUser(log, pass);
+            }
+            else System.out.println("Error");
+        });
+
         Register.setOnAction(event -> {
             Register.getScene().getWindow().hide();
 
@@ -50,6 +60,10 @@ public class HelloController {
             stage.setScene(new Scene(root));
             stage.showAndWait();
         });
+
+    }
+
+    private void loginUser(String log, String pass) {
 
     }
 

@@ -50,6 +50,11 @@ public class RegisterController {
 
     @FXML
     void initialize() {
+        DatabaseHandler dbHandler = new DatabaseHandler();
+
+        Register.setOnAction(event -> {
+            dbHandler.writUserSQL(age.getText(), height.getText(), weight.getText(), gender.getSelectedToggle().toString(), TextLogin.getText(), TextRegister.getText());
+        });
 
     }
 
