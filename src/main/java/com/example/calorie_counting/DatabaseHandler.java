@@ -20,8 +20,9 @@ public class DatabaseHandler extends Config{
     }
 
     public void writUserSQL(String log, String pass, String gender, String weight, String height, String age) {
-        String insert = "INSERT INTO " + Const.USER_NAME +
-                " VALUES (?, ?, ?, ?, ?, ?)";
+        String insert = "INSERT INTO " + Const.USER_NAME + "(" +
+                Const.USER_AGE + "," +Const.USER_HEIGHT + ","+ Const.USER_WEIGHT + ","+ Const.USER_GENDER + "," + Const.USER_LOGIN + "," + Const.USER_PASSWORD + ")" +
+                " VALUES (?,?,?,?,?,?)";
 
 
         try {
@@ -33,17 +34,15 @@ public class DatabaseHandler extends Config{
             prSt.setString(5, log);
             prSt.setString(6, pass);
             prSt.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } catch (ClassNotFoundException e) {
+        } catch (SQLException | ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
 
     }
-    public void ReadUserSQL(String log, String pass, String gender, String weight, String height, String age){
-        String select = "SELECT "+ Const.USER_AGE + ", " +Const.USER_HEIGHT + ", "+ Const.USER_WEIGHT + ", "+ Const.USER_GENDER + ", " + Const.USER_LOGIN + ", " + Const.USER_PASSWORD +
-                " FROM " + Const.USER_NAME;
-
-    }
+//    public void ReadUserSQL(String log, String pass, String gender, String weight, String height, String age){
+//        String select = "SELECT "+ Const.USER_AGE + ", " +Const.USER_HEIGHT + ", "+ Const.USER_WEIGHT + ", "+ Const.USER_GENDER + ", " + Const.USER_LOGIN + ", " + Const.USER_PASSWORD +
+//                " FROM " + Const.USER_NAME;
+//
+//    }
 
 }
