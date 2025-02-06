@@ -50,10 +50,15 @@ public class RegisterController {
 
     @FXML
     void initialize() {
-        DatabaseHandler dbHandler = new DatabaseHandler();
-
+//        DatabaseHandler dbHandler = new DatabaseHandler();
+//
+//        Register.setOnAction(event -> {
+//            dbHandler.writUserSQL(age.getText(), height.getText(), weight.getText(), gender.getSelectedToggle().toString(), TextLogin.getText(), TextRegister.getText());
+//        });
         Register.setOnAction(event -> {
-            dbHandler.writUserSQL(age.getText(), height.getText(), weight.getText(), gender.getSelectedToggle().toString(), TextLogin.getText(), TextRegister.getText());
+            RadioButton g = (RadioButton) gender.getSelectedToggle();
+            javaJDBC.writeDB(age.getText(), height.getText(), weight.getText(), g.getText(), TextLogin.getText(), TextRegister.getText());
+
         });
 
     }
