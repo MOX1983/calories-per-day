@@ -37,4 +37,6 @@ build/
 ### Mac OS ###
 .DS_Store
 
+Config.java
 src/main/java/com/example/calorie_counting/Config.java
+com/example/calorie_counting/Config.java
