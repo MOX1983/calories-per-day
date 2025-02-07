@@ -10,5 +10,4 @@ public class Const {
     public static final String USER_GENDER = "gender";
     public static final String USER_LOGIN = "login";
     public static final String USER_PASSWORD = "pass";
-
 }
