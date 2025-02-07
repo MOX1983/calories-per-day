@@ -1,9 +1,8 @@
 package com.example.calorie_counting;
 
 public class Config {
-    protected String dbHost = "localhost";
-    protected String dbPort = "3306";
-    protected String dbUser = "root";
-    protected String dbPass = "171015246mox";
-    protected String dbName = "calories";
+    protected static String dbUrl = "jdbc:postgresql://localhost:5432/cal";
+    protected static String dbUser = "postgres";
+    protected static String dbPass = "171015246Mox@";
+    protected static String dbName = "calories";
 }

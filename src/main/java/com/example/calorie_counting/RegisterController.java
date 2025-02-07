@@ -50,17 +50,23 @@ public class RegisterController {
 
     @FXML
     void initialize() {
-//        DatabaseHandler dbHandler = new DatabaseHandler();
-//
-//        Register.setOnAction(event -> {
-//            dbHandler.writUserSQL(age.getText(), height.getText(), weight.getText(), gender.getSelectedToggle().toString(), TextLogin.getText(), TextRegister.getText());
-//        });
         Register.setOnAction(event -> {
-            RadioButton g = (RadioButton) gender.getSelectedToggle();
-            javaJDBC.writeDB(age.getText(), height.getText(), weight.getText(), g.getText(), TextLogin.getText(), TextRegister.getText());
-
+            logUser();
         });
 
+    }
+    public void logUser(){
+        RadioButton g = (RadioButton) gender.getSelectedToggle();
+
+        String ageU = age.getText();
+        String heightU = height.getText();
+        String weightU = weight.getText();
+        String genderU = g.getText();
+        String logU = TextLogin.getText();
+        String passU = TextRegister.getText();
+
+        User user = new User(ageU, heightU, weightU, genderU, logU, passU);
+        javaJDBC.writeDB(user);
     }
 
 }
