@@ -58,9 +58,9 @@ public class RegisterController {
     public void logUser(){
         RadioButton g = (RadioButton) gender.getSelectedToggle();
 
-        String ageU = age.getText();
-        String heightU = height.getText();
-        String weightU = weight.getText();
+        int ageU = Integer.parseInt(age.getText());
+        int heightU = Integer.parseInt(height.getText());
+        int weightU = Integer.parseInt(weight.getText());
         String genderU = g.getText();
         String logU = TextLogin.getText();
         String passU = TextRegister.getText();

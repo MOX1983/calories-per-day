@@ -1,14 +1,14 @@
 package com.example.calorie_counting;
 
 public class User {
-    private String age;
-    private String height;
-    private String weight;
+    private int age;
+    private int height;
+    private int weight;
     private String gender;
     private String log;
     private String pass;
 
-    public User(String age, String height, String weight, String gender, String log, String pass) {
+    public User(int age, int height, int weight, String gender, String log, String pass) {
         this.age = age;
         this.height = height;
         this.weight = weight;
@@ -21,27 +21,28 @@ public class User {
 
     }
 
-    public String getAge() {
+
+    public int getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
-    public String getHeight() {
+    public int getHeight() {
         return height;
     }
 
-    public void setHeight(String height) {
+    public void setHeight(int height) {
         this.height = height;
     }
 
-    public String getWeight() {
+    public int getWeight() {
         return weight;
     }
 
-    public void setWeight(String weight) {
+    public void setWeight(int weight) {
         this.weight = weight;
     }
 

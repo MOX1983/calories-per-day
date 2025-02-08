@@ -1,10 +1,7 @@
 package com.example.calorie_counting;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.ResultSet;
+import java.sql.*;
+import java.time.LocalDate;
 
 public class javaJDBC extends Config{
 
@@ -17,9 +14,9 @@ public class javaJDBC extends Config{
         try (Connection con = DriverManager.getConnection(dbUrl, dbUser, dbPass)){
             PreparedStatement prSt = con.prepareStatement(insert);
 
-            prSt.setString(1, user.getAge());
-            prSt.setString(2, user.getHeight());
-            prSt.setString(3, user.getWeight());
+            prSt.setInt(1, user.getAge());
+            prSt.setInt(2, user.getHeight());
+            prSt.setInt(3, user.getWeight());
             prSt.setString(4, user.getGender());
             prSt.setString(5, user.getLog());
             prSt.setString(6, user.getPass());
@@ -39,6 +36,41 @@ public class javaJDBC extends Config{
             PreparedStatement prst = con.prepareStatement(select);
             prst.setString(1, user.getLog());
             prst.setString(2, user.getPass());
+            rs = prst.executeQuery();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return rs;
+    }
+    public static void insertData(Eat eat){
+
+        String insert = "INSERT INTO " + Const.EAT_NAME + "(" +
+                Const.EAT_USER_ID + "," +Const.EAT + "," + Const.EAT_CAL + ","+ Const.EAT_DATE +")" +
+                " VALUES" + "(?,?,?,?)";
+
+        try (Connection con = DriverManager.getConnection(dbUrl, dbUser, dbPass)){
+            PreparedStatement prSt = con.prepareStatement(insert);
+
+            prSt.setInt(1, eat.getIduser());
+            prSt.setString(2, eat.getEat());
+            prSt.setInt(3, eat.getCalories());
+            prSt.setDate(4, Date.valueOf(LocalDate.now()));
+
+            prSt.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static ResultSet ReadData(Eat eat){
+        ResultSet rs = null;
+
+        String select = "SELECT * FROM " + Const.EAT_NAME +
+                " WHERE iduser =? ORDER BY datas";
+        try(Connection con = DriverManager.getConnection(dbUrl, dbUser, dbPass)){
+            PreparedStatement prst = con.prepareStatement(select);
+            prst.setInt(1, eat.getIduser());
             rs = prst.executeQuery();
 
         } catch (SQLException e) {

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
-<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -9,17 +9,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="320.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.calorie_counting.mainController">
    <children>
-      <LineChart fx:id="grafik" layoutY="41.0" prefHeight="250.0" prefWidth="300.0">
-        <xAxis>
-          <CategoryAxis prefHeight="0.0" prefWidth="350.0" side="BOTTOM" />
-        </xAxis>
-        <yAxis>
-          <NumberAxis side="LEFT" />
-        </yAxis>
-      </LineChart>
       <TextField fx:id="ead" layoutX="42.0" layoutY="298.0" promptText="Еда" />
       <TextField fx:id="calorie" layoutX="42.0" layoutY="327.0" promptText="Ккал" />
       <Button fx:id="add" layoutX="42.0" layoutY="361.0" mnemonicParsing="false" text="Добавить" />
@@ -33,5 +24,18 @@
             <Font size="18.0" />
          </font>
       </Label>
+      <Label fx:id="user_name" layoutX="231.0" layoutY="14.0" prefHeight="27.0" prefWidth="69.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <BarChart fx:id="Chart" layoutX="10.0" layoutY="41.0" prefHeight="250.0" prefWidth="300.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
    </children>
 </AnchorPane>
