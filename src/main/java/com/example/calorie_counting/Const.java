@@ -11,7 +11,6 @@ public class Const {
     public static final String USER_LOGIN = "login";
     public static final String USER_PASSWORD = "pass";
 
-
     public static final String EAT_NAME = "eat";
 
     public static final String EAT_ID = "ideat";
@@ -19,4 +18,5 @@ public class Const {
     public static final String EAT = "eat";
     public static final String EAT_CAL = "calories";
     public static final String EAT_DATE = "datas";
+
 }
