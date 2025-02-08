@@ -54,4 +54,5 @@ public class Eat {
     public void setDate(Date date) {
         this.date = date;
     }
+
 }

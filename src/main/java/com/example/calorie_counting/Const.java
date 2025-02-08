@@ -19,4 +19,5 @@ public class Const {
     public static final String EAT_CAL = "calories";
     public static final String EAT_DATE = "datas";
 
+
 }
