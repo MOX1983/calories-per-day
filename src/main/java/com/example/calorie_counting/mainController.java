@@ -98,6 +98,7 @@ public class mainController {
 
         }
         series.setData(data1);
+
     }
 
     private void addEat() {
