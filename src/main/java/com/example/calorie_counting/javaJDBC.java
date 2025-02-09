@@ -67,10 +67,11 @@ public class javaJDBC extends Config{
         ResultSet rs = null;
 
         String select = "SELECT * FROM " + Const.EAT_NAME +
-                " WHERE iduser =? ORDER BY datas";
+                " WHERE iduser =? AND datas =? ORDER BY calories";
         try(Connection con = DriverManager.getConnection(dbUrl, dbUser, dbPass)){
             PreparedStatement prst = con.prepareStatement(select);
             prst.setInt(1, eat.getIduser());
+            prst.setDate(2, Date.valueOf(LocalDate.now()));
             rs = prst.executeQuery();
 
         } catch (SQLException e) {

@@ -52,7 +52,7 @@ public class HelloController {
     }
 
     private void loginUser(String log, String pass) {
-        User user = new User();
+        User user = User.getInstance();
         user.setLog(log);
         user.setPass(pass);
         ResultSet rs = javaJDBC.ReadUserSQL(user);

@@ -1,5 +1,6 @@
 package com.example.calorie_counting;
 
+import java.awt.event.MouseEvent;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class mainController {
 
@@ -24,13 +26,13 @@ public class mainController {
     private URL location;
 
     @FXML
-    private BarChart<?, ?> Chart;
-
-    @FXML
     private Button add;
 
     @FXML
     private TextField calorie;
+
+    @FXML
+    private Label calories_my;
 
     @FXML
     private Label calories_per_day;
@@ -41,27 +43,44 @@ public class mainController {
     @FXML
     private Label user_name;
 
-    XYChart.Series series = new XYChart.Series();
-
     @FXML
     void initialize() {
-        Eat eat = new Eat();
-        int idUser = 1;
-        eat.setIduser(idUser);
 
-        drawChart(eat);
-        Chart.getData().add(series);
+        Eat eat = new Eat();
+        User user = User.getInstance();
+        ResultSet rs = javaJDBC.ReadUserSQL(user);
+        while (true) {
+            try {
+                if (!rs.next()) break;
+                else{
+                    eat.setIduser(rs.getInt("iduser"));
+                    user.setGender(rs.getString("gender"));
+                    user.setAge(rs.getInt("age"));
+                    user.setHeight(rs.getInt("height"));
+                    user.setWeight(rs.getInt("weight"));
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
+        calories_my.setText(String.valueOf(sumCalor(eat)));
+
+        user_name.setText(user.getLog());
+        if(user.getGender().equals("Ж")){
+            double BMR = 655.1 + (9.563 * user.getWeight()) + (1.85 * user.getHeight()) - (4.676 * user.getAge());
+            calories_per_day.setText(String.valueOf(BMR));
+        }
+        else {
+            double BMR = 66.47 + (13.75 * user.getWeight()) + (5.003 * user.getHeight()) - (6.755 * user.getAge());
+            calories_per_day.setText(String.valueOf(BMR));
+        }
 
         add.setOnAction(event -> {
             addEat();
-
-            drawChart(eat);
-            Chart.getData().add(series);
-
+            calories_my.setText(String.valueOf(sumCalor(eat)));
         });
     }
-
-    private void drawChart(Eat eat) {
+    public Integer sumCalor(Eat eat){
         ArrayList<Eat> eatArr = new ArrayList<>();
         ResultSet rs = javaJDBC.ReadData(eat);
         while (true) {
@@ -69,11 +88,8 @@ public class mainController {
                 if (!rs.next()) break;
                 else{
                     int calor = rs.getInt("calories");
-                    Date date = rs.getDate("datas");
-
                     Eat e =  new Eat();
                     e.setCalories(calor);
-                    e.setDate(date);
 
                     eatArr.add(e);
                 }
@@ -81,24 +97,11 @@ public class mainController {
                 throw new RuntimeException(e);
             }
         }
-
-        ArrayList<Eat> newEatArr = new ArrayList<>(eatArr);
-        for(int i = 0; i < newEatArr.size(); i++){
-            for(Eat j : eatArr){
-                if(newEatArr.get(i).getDate().equals(j.getDate()) && newEatArr.get(i) != j){
-                    newEatArr.get(i).sumCalories(j.getCalories());
-                    newEatArr.remove(j);
-                }
-            }
+        int sumC = 0;
+        for(Eat e : eatArr){
+            sumC += e.getCalories();
         }
-
-        ObservableList<XYChart.Data> data1 = FXCollections.observableArrayList();
-        for(Eat i : newEatArr){
-            data1.add(new XYChart.Data(String.valueOf(i.getDate()), i.getCalories()));
-
-        }
-        series.setData(data1);
-
+        return sumC;
     }
 
     private void addEat() {

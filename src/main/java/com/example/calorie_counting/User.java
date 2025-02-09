@@ -1,6 +1,8 @@
 package com.example.calorie_counting;
 
 public class User {
+    private static User instance;
+
     private int age;
     private int height;
     private int weight;
@@ -19,6 +21,13 @@ public class User {
 
     public User() {
 
+    }
+
+    public static User getInstance() {
+        if (instance == null) {
+            instance = new User();
+        }
+        return instance;
     }
 
 
